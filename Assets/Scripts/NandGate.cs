@@ -8,7 +8,7 @@ public class NandGate : MonoBehaviour{
 
     void Awake(){
         nan = new Nand( inA, inB, outp);
-        nan.SetInputs(true, false);
+        nan.SetInputs(true, true);
     }
 
     

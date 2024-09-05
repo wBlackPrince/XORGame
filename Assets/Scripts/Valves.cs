@@ -18,7 +18,7 @@ class Nand{
 
     private void SetOutput(){
         bool a = inputA.GetState();
-        bool b = inputA.GetState();
+        bool b = inputB.GetState();
         output.ChangeState(!(a && b));
     }
 }
@@ -43,7 +43,7 @@ class Or{
 
     private void SetOutput(){
         bool a = inputA.GetState();
-        bool b = inputA.GetState();
+        bool b = inputB.GetState();
         output.ChangeState(a || b);
     }
 }
@@ -68,7 +68,7 @@ class Nor{
 
     private void SetOutput(){
         bool a = inputA.GetState();
-        bool b = inputA.GetState();
+        bool b = inputB.GetState();
         output.ChangeState(!(a || b));
     }
 }
@@ -92,3 +92,32 @@ class AlwaysOn{
 }
 
 
+class BiggerXOR{
+    public Node inputA, inputB, inputC, output;
+
+    public void AlwaysOn(Transform inA,Transform inB, Transform inC,Transform outp,bool a = false, bool b = false, bool c = false){
+        inputA = new Node(inA);
+        inputB = new Node(inB);
+	inputC = new Node(inC);
+        output = new Node(outp);
+        SetInputs(a,b,c);
+    }
+
+    public void SetInputs(bool a, bool b, bool c){
+        
+        inputA.ChangeState(a);
+        inputB.ChangeState(b);
+	    inputC.ChangeState(c);
+	    SetOutput();
+    }
+
+
+    private void SetOutput(){
+        bool a = inputA.GetState();
+        bool b = inputB.GetState();
+        bool c = inputC.GetState();
+	    bool axb = !a  && b || a && !b;
+        output.ChangeState(!axb && c || axb && !c);
+    }
+
+}
