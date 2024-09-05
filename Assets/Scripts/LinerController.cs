@@ -17,6 +17,15 @@ public class LinerController : MonoBehaviour{
     }
 
     private void Update(){
+        Renderer renderer = points[0].GetComponent<Renderer>();
+        if (renderer.material.color ==  Color.green){
+            lr.startColor = Color.green;
+        }
+        else{
+            lr.startColor = Color.red;
+        }
+
+
         for(int i = 0; i < points.Length; i++){
             lr.SetPosition(i, points[i].position);
         }
