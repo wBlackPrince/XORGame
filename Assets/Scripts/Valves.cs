@@ -95,7 +95,7 @@ class AlwaysOn{
 class BiggerXOR{
     public Node inputA, inputB, inputC, output;
 
-    public void AlwaysOn(Transform inA,Transform inB, Transform inC,Transform outp,bool a = false, bool b = false, bool c = false){
+    public BiggerXOR(Transform inA,Transform inB, Transform inC,Transform outp,bool a = false, bool b = false, bool c = false){
         inputA = new Node(inA);
         inputB = new Node(inB);
 	inputC = new Node(inC);
