@@ -20,9 +20,13 @@ class Node{
     }
 
     private void ChangeColor(){
-        
         Renderer renderer = gate.GetComponent<Renderer>();
         renderer.material.color = (state) ? (Color.green) : (Color.red);
+    }
+
+    public void CheckIfColorChanged(){
+        Renderer renderer = gate.GetComponent<Renderer>();
+        state = (renderer.material.color == Color.green) ?  (true) : (false);
     }
 }
 

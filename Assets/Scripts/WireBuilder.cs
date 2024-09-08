@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GraphConnectors{
+public class WireBuilder {
+    private static Vector2 [] positions = new Vector2[100]; //? позиции соединяющих узлов
 
-    public static Vector2 [] positions = new Vector2[100]; //? позиции узлов
     public static GameObject [] lines = new GameObject[51]; //? линии
-    public static int currentPosition = 0; //? текущая позиция точки в массиве positions
 
-    private static float width = .3f;
+    public static GameObject [] nodes = new GameObject[100]; //? сами соединительные узлы
 
-    public static void AddPositions(Vector2 nodePos){
-        positions[currentPosition] = nodePos;
-        DrawLine(currentPosition - 1,currentPosition);
+    public static int currentPosition = 0;
+
+     private static float width = .3f;
+
+    public static void AddPosition(Vector2 mousePos, GameObject newNode){
+        positions[currentPosition] = mousePos;
+        nodes[currentPosition] = newNode;
+        DrawLine(currentPosition - 1, currentPosition);
         currentPosition++;
     }
 
@@ -20,6 +24,12 @@ public static class GraphConnectors{
     private static void DrawLine(int nodeIdA, int nodeIdB){
         if (currentPosition % 2 == 0){
             return;
+        }
+        else{
+            if (   Mathf.Abs(positions[currentPosition].x - positions[currentPosition - 1].x) <= 0.5f   &&
+                Mathf.Abs(positions[currentPosition].y - positions[currentPosition - 1].y) <= 0.5f  ){
+                    return;
+                }
         }
 
         GameObject line = lines[currentPosition - 1] = new GameObject();
@@ -39,6 +49,9 @@ public static class GraphConnectors{
         lineRenderer.startWidth = width;
 
         lineRenderer.endWidth = width;
+
+        //? изменяем следующий узел
+        nodes[currentPosition].GetComponent<Renderer>().material.color = nodes[currentPosition - 1].GetComponent<Renderer>().material.color;
     }
     
 }
