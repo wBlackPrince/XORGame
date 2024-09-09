@@ -1,32 +1,28 @@
 
 using UnityEngine;
 
-class Node{
-    public Transform gate;
-    bool state;
+class Node: MonoBehaviour{
+    public bool state = false;
 
-    public Node(Transform gate, bool signal = false){
-        this.gate = gate;
-        ChangeState(signal);
+    void Awake(){
+        ChangeColor();
     }
 
-    public bool GetState(){
-        return state;
-    }
 
     public void ChangeState(bool signal){
         state = signal;
         ChangeColor();
     }
 
-    private void ChangeColor(){
-        Renderer renderer = gate.GetComponent<Renderer>();
-        renderer.material.color = (state) ? (Color.green) : (Color.red);
+    public void ChangeColor(){
+        Renderer renderer = transform.GetComponent<Renderer>();
+        Debug.Log(state);
+        renderer.material.color = (state == true) ? (Color.green) : (Color.red);
     }
 
-    public void CheckIfColorChanged(){
-        Renderer renderer = gate.GetComponent<Renderer>();
-        state = (renderer.material.color == Color.green) ?  (true) : (false);
+    private void OnMouseDown(){
+        state = (state == true) ? (false) : (true); 
+        ChangeColor();
     }
 }
 

@@ -52,6 +52,11 @@ public class WireBuilder {
 
         //? изменяем следующий узел
         nodes[currentPosition].GetComponent<Renderer>().material.color = nodes[currentPosition - 1].GetComponent<Renderer>().material.color;
+        //nodes[currentPosition]
     }
+
+    private static void DeleteLine(int pos){
+        GameObject.Destroy(lines[pos], 2);
+    } //TODO
     
 }
