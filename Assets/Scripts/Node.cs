@@ -3,9 +3,17 @@ using UnityEngine;
 
 class Node: MonoBehaviour{
     public bool state = false;
+    public bool isWire; //? есть ли соединение по проводу
+
+    int NodeId;
+
 
     void Awake(){
         ChangeColor();
+        ValvesController.nodes[ValvesController.currentNode] = transform;
+        ValvesController.currentNode++;
+        NodeId = ValvesController.NodeId;
+        ValvesController.NodeId++;
     }
 
 
@@ -16,13 +24,14 @@ class Node: MonoBehaviour{
 
     public void ChangeColor(){
         Renderer renderer = transform.GetComponent<Renderer>();
-        Debug.Log(state);
         renderer.material.color = (state == true) ? (Color.green) : (Color.red);
     }
 
     private void OnMouseDown(){
-        state = (state == true) ? (false) : (true); 
-        ChangeColor();
+        //state = (state == true) ? (false) : (true); 
+        //ChangeColor();
+        ValvesController.DrawingWires.Push(NodeId);
+        ValvesController.BuildWire();
     }
 }
 
