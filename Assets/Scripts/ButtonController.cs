@@ -7,11 +7,17 @@ public class ButtonController : MonoBehaviour{
     [SerializeField] 
     Transform NandPrefab;
 
-    public void GenerateNand()
-    {
+    [SerializeField] 
+    Transform OrPrefab;
+
+    public void GenerateNand(){
         ValvesController.valves[ValvesController.currentValve] = Instantiate(NandPrefab);
         ValvesController.currentValve++;
-        ValvesController.valves[0].transform.Find("Square"); //TODO
+    }
+
+    public void GenerateOr(){
+        ValvesController.valves[ValvesController.currentValve] = Instantiate(OrPrefab);
+        ValvesController.currentValve++;
     }
 
     // Update is called once per frame

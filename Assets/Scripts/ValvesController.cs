@@ -15,30 +15,35 @@ public static class ValvesController{
 
     public static Stack<int> DrawingWires = new Stack<int>(); //? провода которые нужно отрисовать, содержит порядковые номера узлов
 
+    //public static Transform WireComponents
 
     public static Vector2 wireStart, wireEnd;
 
     public static float width = 0.3f;
-
+    
 
     public static void BuildWire(){
         
         if (DrawingWires.Count == 2){
             end = DrawingWires.Pop();
             start = DrawingWires.Pop();
+            int positionNode = 0;
+            int positionNodeStart = 0;
             for(int i = 0; i < nodes.Length; i++){
                 if (i == start && i == end){
                     break;
                 }
                 if (i == start){
+                    positionNode = i;
                     wireStart = (Vector2)nodes[i].position;
                 }
                 if (i == end){
+                    positionNodeStart = i;
                     wireEnd = (Vector2)nodes[i].position;
                 }
             }
             nodes[end].GetComponent<Node>().ChangeState(nodes[start].GetComponent<Node>().state);
-            DrawLine(wireStart, wireEnd, nodes[start].GetComponent<Renderer>().material.color);
+            DrawLine(positionNode, positionNodeStart, wireStart, wireEnd, nodes[start].GetComponent<Renderer>().material.color);
             wireStart = Vector2.zero;
             wireEnd = Vector2.zero;
         }
@@ -46,12 +51,13 @@ public static class ValvesController{
 
     }
 
-    public static void DrawLine(Vector2 start, Vector2 end, Color color){
+    public static void DrawLine(int positionNode, int positionNodeStart, Vector2 start, Vector2 end, Color color){
         GameObject line = new GameObject(); // создание объекта со своим именем
+        
 
         LineRenderer lineRenderer = line.AddComponent<LineRenderer>();
 
-        //lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
+        lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
 
         lineRenderer.material.color = color;
 
@@ -64,6 +70,12 @@ public static class ValvesController{
         lineRenderer.startWidth = width;
 
         lineRenderer.endWidth = width;
+
+        int j = nodes[positionNode].GetComponent<Node>().currentWire;
+        nodes[positionNode].GetComponent<Node>().wiresArr[j] = line;
+        nodes[positionNode].GetComponent<Node>().wiresArrExt[j] = nodes[positionNodeStart];
+        nodes[positionNode].GetComponent<Node>().currentWire++;
+        
     }
     
 
