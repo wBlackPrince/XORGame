@@ -10,7 +10,6 @@ public class NodeGate : MonoBehaviour{
         UpdateOutput();
     }
 
-
     public void UpdateOutput(){
         bool i1 = in1.GetComponent<Node>().state;
         in1.GetComponent<Node>().UpdateWires();
@@ -21,3 +20,5 @@ public class NodeGate : MonoBehaviour{
         UpdateOutput();
     }
 }
+
+
