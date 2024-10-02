@@ -7,7 +7,10 @@ public static class ValvesController{
     public static Transform [] valves = new Transform[100];
 
     public static Transform [] nodes = new Transform[100];
-    public static int currentValve, start, end;
+
+    public static GameObject [] wires = new GameObject[100];
+
+    public static int currentValve,currentWire, start, end;
 
     public static int currentNode = 0;
 
@@ -21,6 +24,7 @@ public static class ValvesController{
 
     public static float width = 0.3f;
     
+    public static bool destroyEverything = false;
 
     public static void BuildWire(){
         
@@ -53,7 +57,8 @@ public static class ValvesController{
 
     public static void DrawLine(int positionNode, int positionNodeStart, Vector2 start, Vector2 end, Color color){
         GameObject line = new GameObject(); // создание объекта со своим именем
-        
+        wires[currentWire] = line;
+        currentWire++;
 
         LineRenderer lineRenderer = line.AddComponent<LineRenderer>();
 
@@ -78,6 +83,18 @@ public static class ValvesController{
         
     }
     
+    public static void ClearScene(){
+        for(int i = 0; i < wires.Length; i++){
+            GameObject.Destroy(wires[i]);
+        }
+        destroyEverything = true ;
+        currentValve = 0;
+        currentNode = 0;
+        currentWire = 0;
+        NodeId = 0;
+        start = 0;
+        end = 0;
+    }
 
    
 }
