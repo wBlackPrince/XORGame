@@ -9,6 +9,7 @@ public class NorGate : MonoBehaviour{
         in2 = transform.Find("in2");
         
         output = transform.Find("out");
+        ValvesController.destroyEverything = false;
         UpdateOutput();
     }
 
@@ -23,5 +24,8 @@ public class NorGate : MonoBehaviour{
     
     void Update(){
         UpdateOutput();
+        if(ValvesController.destroyEverything == true){
+            GameObject.Destroy(gameObject);
+        }
     }
 }

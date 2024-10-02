@@ -7,6 +7,7 @@ public class NandGate : MonoBehaviour{
         in1 = transform.Find("in1");
         in2 = transform.Find("in2");
         output = transform.Find("out");
+        ValvesController.destroyEverything = false;
         UpdateOutput();
     }
 
@@ -21,5 +22,8 @@ public class NandGate : MonoBehaviour{
     
     void Update(){
         UpdateOutput();
+        if(ValvesController.destroyEverything == true){
+            GameObject.Destroy(gameObject);
+        }
     }
 }

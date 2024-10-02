@@ -9,6 +9,7 @@ public class AndGate : MonoBehaviour{
         in2 = transform.Find("in2");
         
         output = transform.Find("out");
+        ValvesController.destroyEverything = false;
         UpdateOutput();
     }
 
@@ -23,5 +24,9 @@ public class AndGate : MonoBehaviour{
     
     void Update(){
         UpdateOutput();
+
+        if(ValvesController.destroyEverything == true){
+            GameObject.Destroy(gameObject);
+        }
     }
 }

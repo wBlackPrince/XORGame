@@ -11,6 +11,7 @@ public class BiggerOrGate : MonoBehaviour{
         in3 = transform.Find("in3");
         
         output = transform.Find("out");
+        ValvesController.destroyEverything = false;
         UpdateOutput();
     }
 
@@ -27,5 +28,8 @@ public class BiggerOrGate : MonoBehaviour{
     
     void Update(){
         UpdateOutput();
+        if(ValvesController.destroyEverything == true){
+            GameObject.Destroy(gameObject);
+        }
     }
 }

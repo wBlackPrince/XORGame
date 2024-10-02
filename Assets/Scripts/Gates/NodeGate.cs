@@ -7,6 +7,7 @@ public class NodeGate : MonoBehaviour{
         in1 = transform.Find("in1");
         
         output = transform.Find("out");
+        ValvesController.destroyEverything = false;
         UpdateOutput();
     }
 
@@ -18,6 +19,9 @@ public class NodeGate : MonoBehaviour{
     
     void Update(){
         UpdateOutput();
+        if(ValvesController.destroyEverything == true){
+            GameObject.Destroy(gameObject);
+        }
     }
 }
 
