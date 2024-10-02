@@ -30,6 +30,10 @@ public class ButtonController : MonoBehaviour{
     Transform BigOrPrefab;
 
 
+    [SerializeField] 
+    Transform XorPrefab;
+
+
     public void GenerateNand(){
         ValvesController.valves[ValvesController.currentValve] = Instantiate(NandPrefab);
         ValvesController.currentValve++;
@@ -67,6 +71,11 @@ public class ButtonController : MonoBehaviour{
 
     public void GenerateBigOr(){
         ValvesController.valves[ValvesController.currentValve] = Instantiate(BigOrPrefab);
+        ValvesController.currentValve++;
+    }
+
+    public void GenerateXor(){
+        ValvesController.valves[ValvesController.currentValve] = Instantiate(XorPrefab);
         ValvesController.currentValve++;
     }
 
